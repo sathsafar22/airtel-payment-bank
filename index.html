@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>sathsafr_airtel_payment_bank</title>
+  <!-- Google Fonts + modern styling -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* PURE WHITE BACKGROUND as requested */
+    body {
+      background: #ffffff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* Elegant card with soft shadow, white backdrop */
+    .card {
+      max-width: 600px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2rem 2rem 2.5rem 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+      text-align: center;
+      border: 1px solid #f0f0f0;
+    }
+
+    /* subtle indicator badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f5f7fc;
+      padding: 0.4rem 1.1rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: #1e2a3e;
+      margin-bottom: 1.2rem;
+      border: 1px solid #e9edf2;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #111827 0%, #2c3e66 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .sub {
+      color: #5b6e8c;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      border-bottom: 1px solid #eef2f8;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+
+    /* button group container */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      margin: 2rem 0 1.2rem;
+    }
+
+    /* Universal button styling - modern, accessible, white bg friendly */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      padding: 1rem 1.5rem;
+      border-radius: 80px;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: -0.2px;
+    }
+
+    /* YouTube button specific - vibrant red but still crisp on white */
+    .btn-youtube {
+      background: #ff0000;
+      background: linear-gradient(105deg, #ff1a1a 0%, #e60000 100%);
+      box-shadow: 0 5px 12px rgba(230, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+      color: white;
+    }
+
+    .btn-youtube:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -8px rgba(230, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+      background: linear-gradient(105deg, #ff3333 0%, #cc0000 100%);
+    }
+
+    .btn-youtube:active {
+      transform: translateY(2px);
+      transition: 0.05s;
+    }
+
+    /* account open button - premium look (dark blue/slate) contrasts well with white background */
+    .btn-account {
+      background: #1e293b;
+      background: linear-gradient(115deg, #1e2a3e 0%, #0f172a 100%);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+      color: #f8fafc;
+    }
+
+    .btn-account:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(115deg, #2d3b53 0%, #111827 100%);
+      box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.4) inset;
+      color: white;
+    }
+
+    .btn-account:active {
+      transform: translateY(2px);
+    }
+
+    /* Icons inside buttons (SVG) */
+    .btn-icon {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+
+    /* preview note - soft gray */
+    .preview-note {
+      margin-top: 2rem;
+      background: #f9fafc;
+      border-radius: 1.2rem;
+      padding: 0.9rem 1rem;
+      font-size: 0.8rem;
+      color: #4a5b7a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border: 1px solid #edf2f7;
+    }
+
+    .preview-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-family: 'Inter', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f8;
+    }
+
+    .status-badge {
+      color: #cc0000;
+      font-weight: 600;
+    }
+
+    .account-demo {
+      color: #1e3a8a;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 1.8rem;
+      font-size: 0.7rem;
+      color: #8b9ab0;
+      border-top: 1px solid #ecf3fa;
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .btn-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    /* subtle ripple simulation on click */
+    .btn:active::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+      transform: translate(-50%, -50%) scale(0);
+      animation: ripple 0.45s ease-out;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Additional white-bg fine tuning */
+    .btn-account .btn-icon svg {
+      stroke: white;
+    }
+
+    .btn-youtube .btn-icon svg {
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="badge">
+    <span>प्रशिक्षण वीडियो देखने के बाद ही खाता खोलें</span>
+  </div>
+  <h1>Airtel payment </h1>
+  <div class="sub">One‑click access · Direct & secure</div>
+
+  <div class="button-group">
+    <!-- YOUTUBE VIDEO LINK BUTTON (Replace href with any YouTube video URL) -->
+    <a 
+      href="https://youtu.be/Idzg3Jpe7T8?si=DCDb-55YY8mRTL2P" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="btn btn-youtube"
+      id="youtubeBtn"
+    >
+      <span class="btn-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a2.806 2.806 0 0 0-1.977-1.977C19.664 3.5 12 3.5 12 3.5s-7.664 0-9.521.71a2.806 2.806 0 0 0-1.977 1.976C.5 7.031.5 12 .5 12s0 4.969.502 6.814a2.806 2.806 0 0 0 1.977 1.977c1.857.71 9.521.71 9.521.71s7.664 0 9.521-.71a2.806 2.806 0 0 0 1.977-1.977C23.5 16.969 23.5 12 23.5 12s0-4.969-.502-6.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </span>
+      <span>▶ Trenning video </span>
+    </a>
+
+    <!-- ACCOUNT OPEN LINK BUTTON (Registration / Signup page link) -->
+    <!-- Replace with your actual account creation / signup URL. Using Google signup as demo but you can modify -->
+    <a 
+      href="https://leads.goldenteam.in/?h=U0NITEk2TExpOEkxaWFCRFF6UlRrWGNULy9qWDhkYk5uNFJFOVZGRk9yZz0=" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="btn btn-account"
+      id="accountBtn"
+    >
+      <span class="btn-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+          <path d="M17 3.5a4 4 0 0 1 3 6.5" />
+          <path d="M21 19.5v-2a4 4 0 0 0-3-3.85" />
+        </svg>
+      </span>
+      <span> Open Account </span>
+    </a>
+  </div>
+
+  <!-- additional info panel for clarity (white-bg friendly) -->
+  <div class="preview-note">
+    <span>▶️ YouTube demo: <strong class="status-badge">Video men jese bataya hai wese karen</strong></span>
+    <span>📝 Account funding: <strong class="account-demo">Rs 100 customer ke upi se funding karwani hai</strong></span>
+  </div>
+  <footer>
+    ⚡ Both buttons open in new tab · Replace URLs with your own video & account portal
+  </footer>
+</div>
+
+<script>
+  (function() {
+    // Clean logging for demo purposes, keeps functionality intact
+    const youtubeBtn = document.getElementById('youtubeBtn');
+    const accountBtn = document.getElementById('accountBtn');
+
+    function logClick(buttonName, url) {
+      console.log(`[${buttonName}] Clicked → Opening: ${url}`);
+      // You can replace with your own analytics or just keep console feedback
+    }
+
+    if (youtubeBtn) {
+      youtubeBtn.addEventListener('click', (e) => {
+        logClick('YouTube Video Link Button', youtubeBtn.href);
+      });
+    }
+
+    if (accountBtn) {
+      accountBtn.addEventListener('click', (e) => {
+        logClick('Account Open Link Button', accountBtn.href);
+      });
+    }
+
+    console.log('🎬 YouTube & Account buttons active (white background) — ready for custom URLs');
+  })();
+</script>
+</body>
+</html>
